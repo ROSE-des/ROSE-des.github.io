@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f9f4;
+        }
+
+        /* Header Section */
+        .header {
+            background-image: url('image.img'); /* Replace with actual image */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: black;
+            padding: 50px 20px;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 50px 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #2e7d32;
+        }
+
+        /* Vision and Goals Section */
+        .vision-goals {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .vision-goals img {
+            flex: 1;
+            max-width: 45%;
+            border-radius: 10px;
+        }
+        .vision-goals .text {
+            flex: 1;
+            font-size: 1.2em;
+        }
+
+        /* Key Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: scale(1.05);
+        }
+        .feature img {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+
+        /* Smart Solutions Section */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-item {
+            flex: none;
+            scroll-snap-align: start;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+        }
+
+        /* Additional Content */
+        .additional-content {
+            margin-top: 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .additional-content h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .additional-content ul {
+            list-style-type: disc;
+            padding-left: 40px;
+        }
+        .additional-content li {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Building a Greener Future</h1>
+        <p>Sustainability at the Heart of Our Smart City</p>
+    </div>
+
+    <!-- Vision and Goals Section -->
+    <section>
+        <h2 class="section-title">Vision & Goals</h2>
+        <div class="vision-goals">
+            <div class="text">
+                <p>Our smart city prioritizes green living through innovative technologies, renewable energy, and community-driven solutions. Together, we can create a sustainable future.</p>
+            </div>
+            <img src="Sus.jpeg" alt="Vision and Goals"> <!-- Replace with actual image -->
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section>
+        <h2 class="section-title">Key Features</h2>
+        <div class="features">
+            <div class="feature">
+                <img src="hero.img" alt="Renewable Energy">
+                <h3>Renewable Energy</h3>
+                <p>Harnessing wind and solar power for a cleaner future.</p>
+            </div>
+            <div class="feature">
+                <img src="image.img" alt="Water Conservation">
+                <h3>Water Conservation</h3>
+                <p>Smart systems to reduce and reuse water efficiently.</p>
+            </div>
+            <div class="feature">
+                <img src="tra.img" alt="Green Transportation">
+                <h3>Green Transportation</h3>
+                <p>Promoting electric and shared mobility solutions.</p>
+            </div>
+            <div class="feature">
+                <img src="waste.img" alt="Waste Management">
+                <h3>Waste Management</h3>
+                <p>Advanced waste segregation and recycling programs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Solutions Section -->
+    <section>
+        <h2 class="section-title">Smart Solutions</h2>
+        <div class="carousel">
+            <div class="carousel-item">
+                <h3>IoT Waste Bins</h3>
+                <p>Connected bins that notify when they need emptying.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Energy-Efficient Lighting</h3>
+                <p>Adaptive lighting systems to save energy.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Smart Water Sensors</h3>
+                <p>Real-time monitoring for water conservation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Should Do Section -->
+    <section>
+        <div class="additional-content">
+            <h3>What We Should Do</h3>
+            <ul>
+                <li>Reduce energy consumption by using efficient appliances.</li>
+                <li>Adopt eco-friendly transportation methods like cycling or carpooling.</li>
+                <li>Participate in community clean-up and recycling drives.</li>
+                <li>Support policies and initiatives promoting sustainability.</li>
+                <li>Educate others about the importance of a green future.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Ways to Implement Sustainability in Fashion Section -->
+    <section>
+        <div class="additional-content">
+            <h3>Ways to Implement Sustainability in Fashion</h3>
+            <ul>
+                <li>Buy only what you truly need to avoid overconsumption and impulse purchases. Focus on purchasing quality items that can be worn for a long time.</li>
+                <li>Wash clothes in cold water and prefer air drying over electric dryers to save energy and extend the life of your clothing.</li>
+                <li>Upcycle old clothing into something new. For example, turn old T-shirts into reusable bags, add patches to jeans, or transform fabric scraps into accessories.</li>
+                <li>Donate or sell clothing you no longer wear instead of throwing it away. Here are a few places where you can donate:</li>
+                <ul>
+                    <li>Goodwill</li>
+                    <li>ThredUp</li>
+                    <li>Poshmark</li>
+                </ul>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>

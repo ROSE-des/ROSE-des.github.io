@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Tracker</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f9f4;
+            color: #333;
+        }
+
+        /* Header Section */
+        .header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            font-size: 1.2em;
+            margin: 10px 0 0;
+        }
+
+        /* Daily Rules Section */
+        .rules {
+            padding: 20px;
+            background: #fff;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .rules h2 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        .rules ul {
+            list-style: disc;
+            padding-left: 40px;
+        }
+        .rules li {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Calendar Section */
+        .calendar {
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header h2 {
+            font-size: 1.8em;
+            color: #2e7d32;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .calendar-day {
+            padding: 15px;
+            background: #f1f1f1;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            user-select: none;
+            transition: background 0.3s;
+        }
+        .calendar-day.completed {
+            background: #2e7d32;
+            color: white;
+        }
+        .calendar-day:hover {
+            background: #c8e6c9;
+        }
+
+        /* Motivational Quote */
+        .quote {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            pointer-events: none;
+        }
+        .quote.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Trash Sorting Game Section */
+        .game-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .game-section h2 {
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+        .bins {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        .bin {
+            width: 190px;
+            height: 100px;
+            border: 3px solid #333;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        .green {
+            background-color: #4CAF50;
+        }
+        .red {
+            background-color: #F44336;
+        }
+        .blue {
+            background-color: #2196F3;
+        }
+        .trash-item {
+            width: 70px;
+            height: 70px;
+            margin: 10px;
+            background-color: antiquewhite;
+            display: inline-block;
+            cursor: grab;
+        }
+        .drag-over {
+            border: 2px dashed #000;
+        }
+        .correct {
+            background-color: #8BC34A;
+        }
+        .incorrect {
+            background-color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Sustainability Tracker</h1>
+        <p>Track Your Daily Actions for a Greener Future</p>
+    </div>
+
+    <!-- Daily Rules Section -->
+    <section class="rules">
+        <h2>Daily Rules for Sustainability</h2>
+        <ul>
+            <li>Turn off unnecessary lights and appliances.</li>
+            <li>Use a reusable water bottle and avoid single-use plastics.</li>
+            <li>Walk, bike, or carpool to reduce your carbon footprint.</li>
+            <li>Compost organic waste and recycle whenever possible.</li>
+            <li>Use energy-efficient devices and appliances.</li>
+            <text>Try these rules everyday!! and create an impact</text>
+        </ul>
+    </section>
+
+    <!-- Calendar Section -->
+    <section class="calendar">
+        <div class="calendar-header">
+            <h2 id="calendar-month-year"></h2>
+        </div>
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Calendar days will be dynamically generated -->
+        </div>
+    </section>
+
+    <!-- Trash Sorting Game Section -->
+    <section class="game-section">
+        <h2>Sort the Trash!</h2>
+        <div class="bins">
+            <div id="bin-green" class="bin green">Biodegradable</div>
+            <div id="bin-red" class="bin red">Non-Biodegradable</div>
+            <div id="bin-blue" class="bin blue">Dry/Glass</div>
+        </div>
+        <div class="trash-items">
+            <div id="item1" class="trash-item" draggable="true">Paper</div>
+<div id="item2" class="trash-item" draggable="true">Plastic</div>
+<div id="item3" class="trash-item" draggable="true">Glass</div>
+<div id="item4" class="trash-item" draggable="true">Food Waste</div>
+<div id="item5" class="trash-item" draggable="true">Tissues</div> <!-- Added -->
+<div id="item6" class="trash-item" draggable="true">Metal</div> <!-- Added -->
+<div id="item7" class="trash-item" draggable="true">Plastic Cups</div> <!-- Added -->
+
+        </div>
+    </section>
+
+    <!-- Motivational Quote -->
+    <div class="quote" id="quote">
+        Great job! Keep it up!
+    </div>
+
+    <script>
+        const calendarGrid = document.getElementById('calendar-grid');
+        const monthYearHeader = document.getElementById('calendar-month-year');
+        const quoteDiv = document.getElementById('quote');
+
+        // Drag and Drop Game Logic
+        const items = document.querySelectorAll('.trash-item');
+        const bins = document.querySelectorAll('.bin');
+
+        items.forEach(item => {
+            item.addEventListener('dragstart', dragStart);
+        });
+
+        bins.forEach(bin => {
+            bin.addEventListener('dragover', dragOver);
+            bin.addEventListener('drop', drop);
+        });
+
+        let draggedItem = null;
+
+        function dragStart(e) {
+            draggedItem = e.target;
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+            e.target.classList.add('drag-over');
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            e.target.classList.remove('drag-over');
+
+            const correctBin = getCorrectBin(draggedItem);
+            if (e.target.id === correctBin) {
+                e.target.appendChild(draggedItem);
+                draggedItem.classList.add('correct');
+            } else {
+                draggedItem.classList.add('incorrect');
+                setTimeout(() => {
+                    draggedItem.style.transform = 'none';
+                    draggedItem.classList.remove('incorrect');
+                    draggedItem.style.left = '0px';
+                    draggedItem.style.top = '0px';
+                }, 1000);
+            }
+        }
+        function getCorrectBin(item) {
+    const itemText = item.textContent.trim().toLowerCase();
+    if (itemText === 'food waste' || itemText === 'paper' || itemText === 'tissues') {
+        return 'bin-green'; // Green bin for food waste, paper, and tissues
+    } else if (itemText === 'plastic' || itemText === 'plastic cups') {
+        return 'bin-red'; // Red bin for plastic and plastic cups
+    } else if (itemText === 'glass' || itemText === 'metal') {
+        return 'bin-blue'; // Blue bin for glass and metal
+    }
+    return '';
+}
+
+        // Calendar functionality
+        const quotes = [
+            "Great job! Keep it up!",
+            "Every step counts towards a better future!",
+            "You're making a difference!",
+            "Small actions lead to big changes!",
+            "Keep going, you're inspiring change!"
+        ];
+
+        const today = new Date();
+        const currentMonth = today.getMonth();
+        const currentYear = today.getFullYear();
+
+        const monthNames = [
+            "January", "February", "March", "April", "May", 
+            "June", "July", "August", "September", "October", 
+            "November", "December"
+        ];
+        monthYearHeader.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
+            dayDiv.textContent = day;
+
+            dayDiv.addEventListener('click', () => {
+                dayDiv.classList.toggle('completed');
+                if (dayDiv.classList.contains('completed')) {
+                    showMotivationalQuote();
+                }
+                saveProgress(day);
+            });
+
+            calendarGrid.appendChild(dayDiv);
+        }
+
+        function saveProgress(day) {
+            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
+            if (completedDays.includes(day)) {
+                const index = completedDays.indexOf(day);
+                completedDays.splice(index, 1);
+            } else {
+                completedDays.push(day);
+            }
+            localStorage.setItem('completedDays', JSON.stringify(completedDays));
+        }
+
+        function loadProgress() {
+            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
+            completedDays.forEach(day => {
+                const dayDiv = calendarGrid.children[day - 1];
+                if (dayDiv) dayDiv.classList.add('completed');
+            });
+        }
+
+        function showMotivationalQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteDiv.textContent = randomQuote;
+            quoteDiv.classList.add('show');
+            setTimeout(() => {
+                quoteDiv.classList.remove('show');
+            }, 3000);
+        }
+
+        loadProgress();
+    </script>
+</body>
+</html>
