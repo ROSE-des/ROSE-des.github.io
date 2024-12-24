@@ -52,32 +52,6 @@
       background-color: green;
     }
 
-    #air-quality-container {
-      padding: 20px;
-      background-color: #f1f1f1;
-      margin-top: 20px;
-    }
-
-    #air-quality-container h2 {
-      text-align: center;
-    }
-
-    #air-quality-list {
-      list-style-type: none;
-      padding: 0;
-      text-align: center;
-    }
-
-    #air-quality-list li {
-      padding: 8px;
-      background-color: #fff;
-      margin: 5px 0;
-      border-radius: 4px;
-      display: inline-block;
-      width: 90%;
-      text-align: left;
-    }
-
     footer {
       text-align: center;
       padding: 5px;
@@ -105,35 +79,6 @@
   <!-- OpenStreetMap Container -->
   <div id="map-container"></div>
 
-  <!-- Country Data Section -->
-  <div class="country-data" id="country-data">
-    <h2>Countries and Their Index</h2>
-    <div class="countries">
-      <p style="color:violet;">1. Bangladesh - 79.9</p>
-      <p style="color: violet;">2. Pakistan - 73.7</p>
-      <p style="color: orange;">3. India - 54.4</p>
-      <p style="color: orange;">4. Tajikistan - 49.6</p>
-      <p style="color: orange;">5. Burkina Faso - 46.0</p>
-      <p style="color: orange;">6. Iraq - 43.8</p>
-      <p style="color: orange;">7. United Arab Emirates - 42.3</p>
-      <p style="color: orange;">8. Nepal - 42.4</p>
-      <p style="color: orange;">9. Egypt - 40.4</p>
-      <p style="color: orange;">10. Dem. Rep. of the Congo - 40.3</p>
-      <p style="color: orange;">11. Kuwait - 39.9</p>
-      <p style="color: orange;">12. Bahrain - 39.7</p>
-      <p style="color: orange;">13. Qatar - 37.6</p>
-      <p style="color: orange;">14. Indonesia - 36.4</p>
-      <p style="color: orange;">15. Rwanda - 33.2</p>
-      <p style="color:red;">16. Zimbabwe - 33.2</p>
-      <p style="color: red;">17. Ghana - 33.2</p>
-      <p style="color: red;">18. Kyrgyzstan - 33.1</p>
-      <p style="color: red;">19. China - 32.5</p>
-      <p style="color: red;">20. Libya - 30.4</p>
-      <p style="color: red;">21.Laos-29.6</p>
-      <p style="color:darkred;">22.Vietnam-29.6</p>
-    </div>
-  </div>
-  
   <footer>
     <p>Smart City Solutions © 2024</p>
   </footer>
@@ -158,4 +103,37 @@
       const location = document.getElementById('location-input').value;
 
       if (location) {
-        fetch(`https://nominatim.openstreetmap.org/search?format=json&q
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.length > 0) {
+              const lat = data[0].lat;
+              const lon = data[0].lon;
+
+              // Center the map and add a marker
+              map.setView([lat, lon], 13);
+
+              if (marker) {
+                map.removeLayer(marker);
+              }
+
+              marker = L.marker([lat, lon]).addTo(map)
+                .bindPopup(`<b>${data[0].display_name}</b>`).openPopup();
+            } else {
+              alert('Location not found!');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching location:', error);
+            alert('An error occurred while searching for the location.');
+          });
+      } else {
+        alert('Please enter a location!');
+      }
+    }
+
+    // Initialize the map on page load
+    document.addEventListener('DOMContentLoaded', initMap);
+  </script>
+</body>
+</html>
