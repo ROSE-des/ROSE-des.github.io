@@ -96,16 +96,15 @@
     <p>Explore locations and plan your routes!</p>
   </header>
 
-  <!-- Search Bar -->
+
   <div class="search-bar">
     <input type="text" id="location-input" placeholder="Enter a location">
     <button onclick="searchLocation()">Search</button>
   </div>
 
-  <!-- OpenStreetMap Container -->
   <div id="map-container"></div>
 
-  <!-- Country Data Section -->
+
   <div class="country-data" id="country-data">
     <h2>Countries and Their Index</h2>
     <div class="countries">
@@ -138,17 +137,16 @@
     <p>Smart City Solutions © 2024</p>
   </footer>
 
-  <!-- Leaflet.js -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
   <script>
     let map;
     let marker;
 
     function initMap() {
-      // Initialize the map centered at a default location
-      map = L.map('map-container').setView([37.7749, -122.4194], 10); // Default: San Francisco
 
-      // Add OpenStreetMap tiles
+      map = L.map('map-container').setView([37.7749, -122.4194], 10); 
+
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
       }).addTo(map);
@@ -165,7 +163,7 @@
               const lat = data[0].lat;
               const lon = data[0].lon;
 
-              // Center the map and add a marker
+   
               map.setView([lat, lon], 13);
 
               if (marker) {
@@ -187,7 +185,7 @@
       }
     }
 
-    // Initialize the map on page load
+
     document.addEventListener('DOMContentLoaded', initMap);
   </script>
 </body>
